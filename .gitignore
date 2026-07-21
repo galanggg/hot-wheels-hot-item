@@ -4,3 +4,8 @@ dist
 .DS_Store
 .vscode
 .vercel
+
+# Agent tooling — not product code
+.agents
+.claude
+skills-lock.json

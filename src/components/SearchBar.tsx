@@ -5,9 +5,12 @@ interface Props {
 
 export default function SearchBar({ value, onChange }: Props) {
   return (
-    <div className="relative">
-      <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500">
-        🔍
+    <div className="group flex items-center border border-line bg-asphalt-3 transition-colors focus-within:border-flame">
+      <span
+        aria-hidden="true"
+        className="select-none pl-3 pr-1 text-sm font-bold text-muted transition-colors group-focus-within:text-flame"
+      >
+        /
       </span>
       <input
         type="search"
@@ -15,17 +18,18 @@ export default function SearchBar({ value, onChange }: Props) {
         autoFocus
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Search name, series, or code (JJM00, 009)…"
-        className="w-full rounded-xl bg-neutral-800 py-3.5 pl-11 pr-10 text-base outline-none ring-1 ring-white/10 placeholder:text-neutral-500 focus:ring-2 focus:ring-red-500"
+        placeholder="model, series, or toy code (JJM00, 009)"
+        aria-label="Search cars"
+        className="w-full bg-transparent py-2.5 pr-2 text-base text-ink outline-none placeholder:text-muted/70"
       />
       {value && (
         <button
           type="button"
           onClick={() => onChange("")}
           aria-label="Clear search"
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full px-2 py-1 text-neutral-400 hover:text-white"
+          className="mr-1 flex h-8 shrink-0 items-center px-2 text-[11px] font-bold uppercase tracking-wide text-muted transition-colors hover:text-flame"
         >
-          ✕
+          esc ✕
         </button>
       )}
     </div>

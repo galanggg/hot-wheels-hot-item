@@ -1,0 +1,37 @@
+/* Hallmark · Terminal-scanner theme tokens (Hot Wheels 2026 aisle scanner)
+ * genre: atmospheric · macrostructure: Catalogue · portable design system
+ * Warm-black canvas · flame prompt accent · collector hot-codes as DATA only.
+ */
+:root {
+  /* Canvas — warm terminal black, never #000 */
+  --color-asphalt: #14110f;
+  --color-asphalt-2: #1c1815;
+  --color-asphalt-3: #26211c;
+  --color-line: #332c25;
+  --color-line-2: #4a3f34;
+
+  /* Accent — the single flame prompt/cursor hue */
+  --color-flame: #ff5a1f;
+  --color-ember: #ff7a12;
+  --color-amber: #ffb000;
+
+  /* Text */
+  --color-chrome: #f0ede6;
+  --color-ink: #e9e2d7;
+  --color-muted: #9a8b78;
+
+  /* Hot-type DATA codes (collector-true) */
+  --color-sth: #ffcf40; /* spectraflame gold */
+  --color-th: #2fe08f; /* Treasure Hunt green */
+  --color-nm: #3ab6ff; /* new-model blue */
+
+  /* Type — Space Mono primary, Archivo Expanded wordmark outlier */
+  --font-display: "Archivo Expanded", "Archivo", sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-body: var(--font-mono);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 220ms;
+  --dur-card: 280ms;
+}
