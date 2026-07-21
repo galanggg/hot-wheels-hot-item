@@ -8,6 +8,12 @@ Live: https://hot-item-hot-wheels.vercel.app/
 
 Data source: [hotwheels.fandom.com](https://hotwheels.fandom.com/wiki/List_of_2026_Hot_Wheels).
 
+## Screenshots
+
+| Desktop | Mobile |
+| --- | --- |
+| ![Desktop view](screenshots/desktop.png) | <img src="screenshots/mobile.png" alt="Mobile view" width="260"> |
+
 ## Stack
 
 - **Vite + React + TypeScript + Tailwind v4**
