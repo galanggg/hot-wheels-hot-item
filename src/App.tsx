@@ -47,9 +47,9 @@ export default function App() {
   const filtered = debouncedQuery.trim().length > 0 || active.size > 0;
 
   return (
-    <div className="mx-auto min-h-dvh max-w-6xl px-3 pb-12 sm:px-4">
+    <div className="mx-auto min-h-dvh max-w-6xl px-[calc(0.75rem+env(safe-area-inset-left))] pb-[calc(3rem+env(safe-area-inset-bottom))] pr-[calc(0.75rem+env(safe-area-inset-right))] sm:px-[calc(1rem+env(safe-area-inset-left))] sm:pr-[calc(1rem+env(safe-area-inset-right))]">
       {/* ── Command masthead: the field-terminal header ───────────── */}
-      <header className="sticky top-0 z-20 -mx-3 bg-asphalt/95 px-3 pt-3 backdrop-blur sm:-mx-4 sm:px-4">
+      <header className="sticky top-0 z-20 -mx-3 bg-asphalt/95 px-3 pt-[calc(0.75rem+env(safe-area-inset-top))] backdrop-blur sm:-mx-4 sm:px-4">
         <div className="border border-line bg-asphalt-2">
           {/* prompt line */}
           <div className="flex items-center gap-2 border-b border-line px-3 py-1.5 text-[11px] text-muted">
