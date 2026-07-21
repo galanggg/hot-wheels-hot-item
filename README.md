@@ -4,7 +4,7 @@ Fast, mobile-first web app to find collectible Hot Wheels while standing in a su
 aisle. Type a model name (or scan the thumbnail grid) and instantly see if a car is a
 **Treasure Hunt (TH)**, **Super Treasure Hunt (STH)**, or **New Model (NM)**.
 
-Live: https://hot-item-hot-wheels-9i3ba72df-galang-kertas-projects.vercel.app/
+Live: https://hot-item-hot-wheels.vercel.app/
 
 Data source: [hotwheels.fandom.com](https://hotwheels.fandom.com/wiki/List_of_2026_Hot_Wheels).
 
