@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Car, Catalog, HotType } from "./types";
 import catalog from "./data/cars.json";
+import { groupCars } from "./lib/group";
 import { buildIndex, filterCars } from "./lib/search";
 import SearchBar from "./components/SearchBar";
 import FilterChips from "./components/FilterChips";
@@ -23,17 +24,18 @@ export default function App() {
   const debouncedQuery = useDebounced(query);
 
   const cars = data.cars as Car[];
-  const index = useMemo(() => buildIndex(cars), [cars]);
+  const groups = useMemo(() => groupCars(cars), [cars]);
+  const index = useMemo(() => buildIndex(groups), [groups]);
 
   const counts = useMemo(() => {
     const c: Record<HotType, number> = { STH: 0, TH: 0, NM: 0 };
-    for (const car of cars) if (car.hot) c[car.hot]++;
+    for (const g of groups) if (g.hot) c[g.hot]++;
     return c;
-  }, [cars]);
+  }, [groups]);
 
   const results = useMemo(
-    () => filterCars(cars, index, debouncedQuery, active),
-    [cars, index, debouncedQuery, active]
+    () => filterCars(groups, index, debouncedQuery, active),
+    [groups, index, debouncedQuery, active]
   );
 
   const toggle = (t: HotType) =>
@@ -71,7 +73,7 @@ export default function App() {
             <div className="shrink-0 text-right text-[11px] leading-tight text-muted">
               <div>
                 <span className="text-lg font-bold text-chrome">
-                  {String(cars.length).padStart(3, "0")}
+                  {String(groups.length).padStart(3, "0")}
                 </span>{" "}
                 carded
               </div>
@@ -104,17 +106,17 @@ export default function App() {
         <span className="text-flame">&gt;</span>
         <span className="text-chrome">{results.length}</span>
         <span>{results.length === 1 ? "match" : "matches"}</span>
-        {filtered && <span className="text-muted">/ {cars.length} total</span>}
+        {filtered && <span className="text-muted">/ {groups.length} total</span>}
       </div>
 
       <main className="mt-4">
-        <CarGrid cars={results} />
+        <CarGrid groups={results} />
       </main>
 
       {/* ── EOF colophon ────────────────────────────────────────── */}
       <footer className="mt-12 border-t border-line pt-4 text-[11px] leading-relaxed text-muted">
         <span className="text-flame">--</span> EOF <span className="text-flame">--</span>{" "}
-        {cars.length} cars carded · source hotwheels.fandom.com · synced{" "}
+        {groups.length} cars carded · source hotwheels.fandom.com · synced{" "}
         <span className="text-ink">{data.updatedAt.slice(0, 10)}</span>
       </footer>
     </div>
