@@ -4,6 +4,7 @@ import catalog from "./data/cars.json";
 import { groupCars } from "./lib/group";
 import { buildIndex, filterCars } from "./lib/search";
 import SearchBar from "./components/SearchBar";
+import CodeChips from "./components/CodeChips";
 import FilterChips from "./components/FilterChips";
 import CarGrid from "./components/CarGrid";
 
@@ -105,6 +106,11 @@ export default function App() {
         {/* ── Command bar ───────────────────────────────────────── */}
         <div className="mt-2">
           <SearchBar value={query} onChange={setQuery} />
+        </div>
+
+        {/* ── Toy-code quick-tap prefixes ───────────────────────── */}
+        <div className="mt-2">
+          <CodeChips groups={groups} query={query} onPick={setQuery} />
         </div>
 
         {/* ── Filter flags ──────────────────────────────────────── */}
