@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import type { Car, Catalog, HotType } from "./types";
 import catalog from "./data/cars.json";
 import { groupCars } from "./lib/group";
@@ -6,6 +6,9 @@ import { buildIndex, filterCars } from "./lib/search";
 import SearchBar from "./components/SearchBar";
 import FilterChips from "./components/FilterChips";
 import CarGrid from "./components/CarGrid";
+
+// Code-split the scanner: tesseract.js (WASM + worker) only loads on first open.
+const ScanOverlay = lazy(() => import("./components/ScanOverlay"));
 
 const data = catalog as Catalog;
 
@@ -21,6 +24,7 @@ function useDebounced<T>(value: T, delay = 150): T {
 export default function App() {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<Set<HotType>>(new Set());
+  const [scanOpen, setScanOpen] = useState(false);
   const debouncedQuery = useDebounced(query);
 
   const cars = data.cars as Car[];
@@ -54,12 +58,25 @@ export default function App() {
       <header className="sticky top-0 z-20 -mx-3 bg-asphalt/95 px-3 pt-[calc(0.75rem+env(safe-area-inset-top))] backdrop-blur sm:-mx-4 sm:px-4">
         <div className="border border-line bg-asphalt-2">
           {/* prompt line */}
-          <div className="flex items-center gap-2 border-b border-line px-3 py-1.5 text-[11px] text-muted">
-            <span className="text-flame">▸</span>
-            <span className="truncate">
-              hotwheels@aisle<span className="text-ink">:~$</span> scan --year{" "}
-              <span className="text-chrome">{data.year}</span>
+          <div className="flex items-center justify-between gap-2 border-b border-line px-3 py-1.5 text-[11px] text-muted">
+            <span className="flex min-w-0 items-center gap-2 truncate">
+              <span className="text-flame">▸</span>
+              <span className="truncate">
+                hotwheels@aisle<span className="text-ink">:~$</span> scan --year{" "}
+                <span className="text-chrome">{data.year}</span>
+              </span>
             </span>
+            <button
+              type="button"
+              onClick={() => setScanOpen(true)}
+              className="flex shrink-0 items-center gap-1.5 border border-line-2 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-chrome transition-colors hover:border-flame hover:text-flame"
+              aria-label="Open live toy-code scanner"
+            >
+              <span aria-hidden="true">▸</span> scan
+              <span className="border border-flame px-1 text-[8px] leading-tight text-flame">
+                beta
+              </span>
+            </button>
           </div>
 
           {/* wordmark + live count readout */}
@@ -119,6 +136,17 @@ export default function App() {
         {groups.length} cars carded · source hotwheels.fandom.com · synced{" "}
         <span className="text-ink">{data.updatedAt.slice(0, 10)}</span>
       </footer>
+
+      {scanOpen && (
+        <Suspense fallback={null}>
+          <ScanOverlay
+            groups={groups}
+            index={index}
+            onClose={() => setScanOpen(false)}
+            onPick={setQuery}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
