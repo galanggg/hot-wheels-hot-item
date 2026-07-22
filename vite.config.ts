@@ -37,6 +37,15 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"],
         runtimeCaching: [
           {
+            urlPattern: ({ request }) => request.mode === "navigate",
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "app-shell",
+              networkTimeoutSeconds: 3,
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
             urlPattern: ({ url }) => url.origin === "https://images.weserv.nl",
             handler: "CacheFirst",
             options: {
