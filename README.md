@@ -8,6 +8,16 @@ Live: https://hot-item-hot-wheels.vercel.app/
 
 Data source: [hotwheels.fandom.com](https://hotwheels.fandom.com/wiki/List_of_2026_Hot_Wheels).
 
+## Features
+
+- **Fuzzy search** across model name, series, and toy # — forgiving of typos in a noisy aisle.
+- **Hot-item badges** — instantly flags Treasure Hunt (TH), Super Treasure Hunt (STH), and New Model (NM).
+- **One card per collector number** — color variants of the same casting collapse into a single card instead of cluttering the grid.
+- **Toy number code** shown on every card for quick cross-referencing against the packaging.
+- **Installable PWA** — add to home screen, launches standalone, works offline.
+- **Fresh on open** — app shell served NetworkFirst, so a new deploy shows up the next time you open it online.
+- **Mobile-first terminal UI** — respects iPhone safe-area insets, built for one-handed scanning.
+
 ## Screenshots
 
 | Desktop | Mobile |
@@ -18,6 +28,7 @@ Data source: [hotwheels.fandom.com](https://hotwheels.fandom.com/wiki/List_of_20
 
 - **Vite + React + TypeScript + Tailwind v4**
 - **Fuse.js** — fuzzy search over model name, series, toy #
+- **vite-plugin-pwa** (Workbox) — installable, offline-capable, NetworkFirst app shell
 - Static SPA, no backend. Catalog baked into `src/data/cars.json` at build time.
 
 ## Develop
