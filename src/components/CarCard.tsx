@@ -91,7 +91,14 @@ export default function CarCard({ group, index }: { group: CarGroup; index: numb
       {/* data rows */}
       <div className="flex flex-1 flex-col gap-1 border-t border-line p-2">
         <div className="flex items-center justify-between gap-1 text-[11px] text-muted">
-          <span className="text-flame">#{group.col ?? "—"}</span>
+          <span className="flex items-baseline gap-1.5">
+            <span className="text-flame">#{group.col ?? "—"}</span>
+            {group.toyNum && (
+              <span className="tracking-wide text-muted" title="Toy number">
+                {group.toyNum}
+              </span>
+            )}
+          </span>
           {group.seriesNum && <span>{group.seriesNum}</span>}
         </div>
         <h3 className="text-[13px] font-bold leading-tight text-chrome">{group.name}</h3>

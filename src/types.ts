@@ -26,6 +26,7 @@ export interface Catalog {
 export interface CarGroup {
   key: string;
   col: string | null;
+  toyNum: string | null; // primary variant toy/casting code (printed on blister card)
   name: string;
   series: string | null;
   seriesColor: string | null;

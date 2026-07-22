@@ -41,6 +41,7 @@ export function groupCars(cars: Car[]): CarGroup[] {
     return {
       key,
       col: primary.col,
+      toyNum: primary.toyNum,
       name: primary.name,
       series: primary.series,
       seriesColor: primary.seriesColor,
